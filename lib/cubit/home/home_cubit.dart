@@ -17,22 +17,34 @@ class HomeCubit extends Cubit<HomeStates> {
     loading = true;
     emit(LoadingGetDataState());
     var response = await DioHelper.getData(url: '/api/characters', query: {});
-    if (response.statusCode == 200) {
-      characterList = (response.data as List)
-          .map((e) => CharacterModel.fromJson(e))
-          .toList();
-//----------------------
-      loading = false;
-      emit(LoadingGetDataState());
-      print(response.statusCode);
-      print('characterList num ======> ${characterList!.length}');
-    } else {
+
+    try {
+      if (response.statusCode == 200) {
+        characterList = (response.data as List)
+            .map((e) => CharacterModel.fromJson(e))
+            .toList();
+
+        loading = false;
+        emit(LoadingGetDataState());
+        print(response.statusCode);
+        print('characterList num ======> ${characterList!.length}');
+      }
+      //----------------------
+      else {
+        print(response.statusCode);
+        loading = false;
+        emit(LoadingGetDataState());
+        noData = true;
+        emit(NODataState());
+        print('Eroooooooooooooor in getting data');
+      }
+    } catch (e) {
       print(response.statusCode);
       loading = false;
       emit(LoadingGetDataState());
       noData = true;
       emit(NODataState());
-      print('Eroooooooooooooor in getting data');
+      print('Catch Error in getting data');
     }
   }
 

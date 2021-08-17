@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => HomeCubit()..getData()),
       ],
-      child: BlocConsumer<HomeCubit,HomeStates>(
+      child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) => MaterialApp(
           title: 'Flutter Demo',

@@ -41,57 +41,57 @@ class ListDetailsItem extends StatelessWidget {
           ),
           SizedBox(width: 10),
           Container(
-            width: w * .5 - 20,
-            // color: Colors.red,
-            child: list == null
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        info != null ? info! : 'noData',
-                        style: TextStyle(
-                            fontSize: 14.0, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  )
-                : Expanded(
-                    child: Center(
-                      child: ListView.builder(
-                        itemBuilder: (context, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
+              width: w * .5 - 20,
+              // color: Colors.red,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  list == null
+                      ? Text(
+                          info != null ? info! : 'noData',
+                          style: TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.bold),
+                        )
+                      : Expanded(
+                          child: Center(
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 10,
+                                        width: 10,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(width: 15),
+                                      Flexible(
+                                          child: Text(
+                                        '${list![index]}',
+                                        style: TextStyle(
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(width: 15),
-                                Flexible(
-                                    child: Text(
-                                  '${list![index]}',
-                                  style: TextStyle(
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                              ],
+                                  SizedBox(height: 10)
+                                ],
+                              ),
+                              itemCount: list!.length,
                             ),
-                            SizedBox(height: 10)
-                          ],
+                          ),
                         ),
-                        itemCount: list!.length,
-                      ),
-                    ),
-                  ),
-          ),
+                ],
+              )),
         ],
       ),
     );
