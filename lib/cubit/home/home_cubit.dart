@@ -1,6 +1,8 @@
 import 'package:breakingbad_api/cubit/home/home_state.dart';
 import 'package:breakingbad_api/model/character_model.dart';
 import 'package:breakingbad_api/shared/network/dio_helper.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +10,7 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitialState());
   static HomeCubit get(context) => BlocProvider.of(context);
   //====================================
-  bool loading = false;
+  bool loading = true;
   bool noData = false;
   List<CharacterModel>? characterList;
 
@@ -16,16 +18,17 @@ class HomeCubit extends Cubit<HomeStates> {
     print('goooooooooooo');
     loading = true;
     emit(LoadingGetDataState());
-    var response = await DioHelper.getData(url: '/api/characters', query: {});
 
     try {
+      var response = await DioHelper.getData(url: '/api/characters', query: {});
       if (response.statusCode == 200) {
         characterList = (response.data as List)
             .map((e) => CharacterModel.fromJson(e))
             .toList();
-
         loading = false;
         emit(LoadingGetDataState());
+        noData = false;
+        emit(NODataState());
         print(response.statusCode);
         print('characterList num ======> ${characterList!.length}');
       }
@@ -39,7 +42,11 @@ class HomeCubit extends Cubit<HomeStates> {
         print('Eroooooooooooooor in getting data');
       }
     } catch (e) {
-      print(response.statusCode);
+      if (e is DioError) {
+        internetConnect = false;
+        emit(InternertConnectionState());
+        print('Dio Errror no internet');
+      }
       loading = false;
       emit(LoadingGetDataState());
       noData = true;
@@ -68,5 +75,21 @@ class HomeCubit extends Cubit<HomeStates> {
       }
     });
     emit(ListChangeState());
+  }
+
+  //===============================
+  bool internetConnect = true;
+  checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.wifi ||
+        connectivityResult == ConnectivityResult.mobile) {
+      internetConnect = true;
+      emit(InternertConnectionState());
+      getData();
+    } else {
+      internetConnect = false;
+      emit(InternertConnectionState());
+      print('no internet');
+    }
   }
 }

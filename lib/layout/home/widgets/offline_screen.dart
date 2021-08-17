@@ -17,6 +17,7 @@ class OfflineScreen extends StatelessWidget {
         Text('Please, check your connection'),
         SizedBox(height: 10),
         Text('.......'),
+        SizedBox(height: 10),
       ],
     ));
   }

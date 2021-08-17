@@ -9,3 +9,4 @@ class NODataState extends HomeStates {}
 class SearchState extends HomeStates {}
 
 class ListChangeState extends HomeStates {}
+class InternertConnectionState extends HomeStates {}

@@ -13,7 +13,7 @@ class NoDataRefresh extends StatelessWidget {
         Text('NoData'),
         ElevatedButton(
             onPressed: () {
-              cubit.getData();
+              cubit.checkConnection()();
             },
             child: Text('Resfesh'))
       ],

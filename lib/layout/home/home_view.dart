@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'widgets/data_view_grid.dart';
+import 'widgets/no_internet_refresh.dart';
 import 'widgets/nodata_refresh.dart';
 import 'widgets/offline_screen.dart';
 import 'widgets/seach_button.dart';
@@ -29,36 +30,47 @@ class HomeView extends StatelessWidget {
             actions: [SeachButton()],
           ),
           body: OfflineBuilder(
-            connectivityBuilder: (
-              BuildContext context,
-              ConnectivityResult connectivity,
-              Widget child,
-            ) {
-              final bool connected = connectivity != ConnectivityResult.none;
+              connectivityBuilder: (
+                BuildContext context,
+                ConnectivityResult connectivity,
+                Widget child,
+              ) {
+                final bool connected = connectivity != ConnectivityResult.none;
 
-              if (connected) {
-                // cubit.getData();
-                return Container(
-                  padding: EdgeInsets.all(10),
-                  child: cubit.loading
-                      ? Center(child: CupertinoActivityIndicator())
-                      : cubit.noData
-                          ? NoDataRefresh()
-                          : DataViewGrid(),
-                );
-              } else {
-                return OfflineScreen();
-              }
-            },
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: cubit.loading
-                  ? Center(child: CupertinoActivityIndicator())
-                  : cubit.noData
-                      ? NoDataRefresh()
-                      : DataViewGrid(),
-            ),
-          )),
+                if (connected) {
+                  return screenChild(context);
+                } else {
+                  return OfflineScreen();
+                }
+              },
+              child: screenChild(context)
+              // Container(
+              //   padding: EdgeInsets.all(10),
+              //   child: cubit.loading
+              //       ? Center(child: CupertinoActivityIndicator())
+              //       : cubit.noData
+              //           ? NoDataRefresh()
+              //           : DataViewGrid(),
+              // ),
+              )),
     );
+  }
+
+  screenChild(context) {
+    HomeCubit cubit = HomeCubit.get(context);
+    if (cubit.internetConnect ) {
+      return Container(
+        padding: EdgeInsets.all(10),
+        child: cubit.loading
+            ? Center(child: CupertinoActivityIndicator())
+            : cubit.noData
+                ? NoDataRefresh()
+                : DataViewGrid(),
+      );
+    } 
+   
+    else {
+      return NoInternetRefresh();
+    }
   }
 }
