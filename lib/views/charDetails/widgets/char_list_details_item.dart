@@ -1,12 +1,12 @@
-import 'package:breakingbad_api/shared/themes/dark_theme.dart';
+import 'package:breakingbad_api/core/themes/dark_theme.dart';
 import 'package:flutter/material.dart';
 
-class ListDetailsItem extends StatelessWidget {
+class CharListDetailsItem extends StatelessWidget {
   final String title;
   final String? info;
   final IconData iconData;
   final List? list;
-  ListDetailsItem(
+  CharListDetailsItem(
       {required this.title, this.info, required this.iconData, this.list});
 
   @override

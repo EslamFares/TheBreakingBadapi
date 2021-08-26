@@ -1,5 +1,4 @@
-
-import 'package:breakingbad_api/cubit/home/home_cubit.dart';
+import 'package:breakingbad_api/views/home/cubits/home_cubit.dart';
 import 'package:flutter/material.dart';
 
 class NoInternetRefresh extends StatefulWidget {
@@ -19,7 +18,7 @@ class _NoInternetRefreshState extends State<NoInternetRefresh> {
     return Center(
         child: ElevatedButton(
             onPressed: () {
-              HomeCubit.get(context).checkConnection()();
+              HomeCubit.get(context).checkConnection();
             },
             child: Text('Resfesh')));
   }

@@ -1,4 +1,4 @@
-import 'package:breakingbad_api/cubit/home/home_cubit.dart';
+import 'package:breakingbad_api/views/home/cubits/home_cubit.dart';
 import 'package:flutter/material.dart';
 
 class NoDataRefresh extends StatelessWidget {
@@ -13,7 +13,7 @@ class NoDataRefresh extends StatelessWidget {
         Text('NoData'),
         ElevatedButton(
             onPressed: () {
-              cubit.checkConnection()();
+              cubit.checkConnection();
             },
             child: Text('Resfesh'))
       ],

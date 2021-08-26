@@ -1,4 +1,4 @@
-import 'package:breakingbad_api/cubit/home/home_cubit.dart';
+import 'package:breakingbad_api/views/home/cubits/home_cubit.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextFormFilld extends StatelessWidget {

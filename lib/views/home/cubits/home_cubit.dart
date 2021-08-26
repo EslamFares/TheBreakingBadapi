@@ -1,6 +1,6 @@
-import 'package:breakingbad_api/cubit/home/home_state.dart';
-import 'package:breakingbad_api/model/character_model.dart';
-import 'package:breakingbad_api/shared/network/dio_helper.dart';
+import 'package:breakingbad_api/core/network/dio_helper.dart';
+import 'package:breakingbad_api/views/home/states/home_state.dart';
+import 'package:breakingbad_api/views/home/models/character_model.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,8 +68,8 @@ class HomeCubit extends Cubit<HomeStates> {
     searchList!.clear();
 
     characterList!.forEach((element) {
-      if (element.name!.toLowerCase().contains(value) ||
-          element.name!.toUpperCase().contains(value)) {
+      if (element.name!.toLowerCase().contains(value.toLowerCase()) ||
+          element.name!.toUpperCase().contains(value.toUpperCase())) {
         print(true);
         searchList!.add(element);
       }
