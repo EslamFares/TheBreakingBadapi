@@ -14,7 +14,7 @@ class HomeCubit extends Cubit<HomeStates> {
   bool noData = false;
   List<CharacterModel>? characterList;
 
-  getData() async {
+  Future<void> getData() async {
     print('goooooooooooo');
     loading = true;
     emit(LoadingGetDataState());
@@ -57,14 +57,14 @@ class HomeCubit extends Cubit<HomeStates> {
 
   //====================== Search =====================
   bool isSearch = false;
-  changeSearch() {
+  void changeSearch() {
     isSearch = !isSearch;
     emit(SearchState());
   }
 
   final searchController = TextEditingController();
   List<CharacterModel>? searchList = [];
-  serch(value) {
+  void serch(value) {
     searchList!.clear();
 
     characterList!.forEach((element) {
@@ -79,7 +79,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   //===============================
   bool internetConnect = true;
-  checkConnection() async {
+  Future<void> checkConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.wifi ||
         connectivityResult == ConnectivityResult.mobile) {

@@ -1,11 +1,9 @@
-import 'package:breakingbad_api/views/home/cubits/home_cubit.dart';
-import 'package:breakingbad_api/views/home/states/home_state.dart';
+import 'package:breakingbad_api/views/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/network/dio_helper.dart';
 import 'core/themes/dark_theme.dart';
 import 'consts/bloc_observer.dart';
-import 'views/home/home_view.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
